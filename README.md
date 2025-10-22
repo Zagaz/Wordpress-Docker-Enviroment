@@ -27,6 +27,7 @@ cd wordpress-docker-enviroment
 ### 2. ⚙️ Configuration 
 - Open the `docker-compose.yaml` file to configure your services. You can specify the WordPress version, database settings, and other configurations.
 
+
 ### 3. 🚀 Starting the Services 
 - To start your WordPress environment, run:
 ```bash
@@ -37,8 +38,6 @@ This command will start the containers in detached mode.
 ```bash
 docker-compose down
 ```
-
-
 
 ### 4. 🌐 Accessing WordPress 
 - Once the containers are running, you can access your WordPress site by navigating to `http://localhost:8000` in your web browser.
@@ -60,6 +59,40 @@ docker-compose down --volumes
 This command will stop the containers and remove the associated volumes, effectively deleting the environment.
 
 ## 📄 Default .env Data 
+[## 🐳 Default Docker Images and How to Change Them]
+
+This environment uses Docker images for WordPress, the database, and phpMyAdmin. By default, these images are defined in the `docker-compose.yaml` file using environment variables from your `.env` file.
+
+### Default Images
+
+- **WordPress:** `${WORDPRESS_IMAGE}` (Default: `wordpress:latest`)
+- **Database:** `${MYSQL_IMAGE}` (Default: `mariadb:latest`)
+- **phpMyAdmin:** `${PHPMYADMIN_IMAGE}` (Default: `phpmyadmin/phpmyadmin:latest`)
+
+### How to Change the Images
+
+To use a different image or version, edit the corresponding variable in your `.env` file:
+
+```env
+WORDPRESS_IMAGE=wordpress:latest
+MYSQL_IMAGE=mariadb:latest
+PHPMYADMIN_IMAGE=phpmyadmin/phpmyadmin:latest
+```
+
+For example, to use MySQL instead of MariaDB, set:
+
+```env
+MYSQL_IMAGE=mysql:latest
+```
+
+After making changes, restart your containers:
+
+```bash
+docker compose down
+docker compose up -d
+```
+
+This will apply your new image settings.
 
 The default data in the `.env` file is provided to help you get started with your WordPress Docker environment. You can change these values as desired to suit your specific configuration needs.
 
