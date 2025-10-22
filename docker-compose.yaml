@@ -1,14 +1,14 @@
 services:
   database:
     mem_limit: 2048m
-    image: ${MYSQL_IMAGE} #Defalts to mariadb:latest 
+    image: ${MYSQL_IMAGE} #Default: mariadb:latest 
     restart: always
     ports:
       - "3306:3306"
     env_file:
       - .env
     volumes:
-      - db-data:/var/lib/mysql
+      - db-data:/var/lib/mysql'
     networks:
       - wordpress-network  
     environment:
@@ -22,7 +22,7 @@ services:
     image: ${PHPMYADMIN_IMAGE} #Default: phpmyadmin/phpmyadmin:latest
     restart: always
     ports:
-      - "8081:80"
+      - "8081:80" # http://localhost:8080/
     env_file:
       - .env
     environment:
@@ -36,7 +36,7 @@ services:
     image: ${WORDPRESS_IMAGE} #Default: wordpress:latest
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "8080:80" # http://localhost:8080/
     env_file:
       - .env
     environment:

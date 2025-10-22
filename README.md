@@ -45,6 +45,11 @@ docker-compose down
 
 ### 5. 🗃️ Accessing PHPMyAdmin
 - - Once the containers are running, you can access your WordPress site by navigating to `http://localhost:8081` in your web browser.
+- Login: wp_user (Default)
+- Password: wp_password (Default)
+You can change this credentials at .env file.
+- MYSQL_USER=wp_user
+- MYSQL_PASSWORD=wp_password
 
 ### 6. 🛑 Stopping the Services ⏹️
 - To stop the running services, use:
