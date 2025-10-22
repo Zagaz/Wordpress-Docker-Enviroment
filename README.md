@@ -63,8 +63,7 @@ docker-compose down --volumes
 ```
 This command will stop the containers and remove the associated volumes, effectively deleting the environment.
 
-## 📄 Default .env Data 
-[## 🐳 Default Docker Images and How to Change Them]
+## 🐳 Default .env Data and How to Change Them
 
 This environment uses Docker images for WordPress, the database, and phpMyAdmin. By default, these images are defined in the `docker-compose.yaml` file using environment variables from your `.env` file.
 
