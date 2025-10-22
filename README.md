@@ -134,3 +134,53 @@ docker cp ./local/path/to/my-plugin wordpress:/var/www/html/wp-content/plugins/m
 Note: Changing ownership or permissions affects security. Prefer chown to set ownership to your user if you plan to edit files locally. If you only need to add files occasionally, `sudo` or `docker cp` are convenient alternatives.
 
 
+## 🧾 TL;DR — Quick start
+
+- Clone the repo and enter the folder:
+
+```bash
+git clone https://github.com/Zagaz/Wordpress-Docker-Enviroment.git
+cd wordpress-docker-enviroment
+```
+
+- Edit `.env` if you want to change default images or credentials (e.g. `WORDPRESS_IMAGE`, `MYSQL_IMAGE`, `PHPMYADMIN_IMAGE`, `MYSQL_USER`, `MYSQL_PASSWORD`).
+
+- Start the stack:
+
+```bash
+docker compose up -d
+```
+
+- Stop the stack:
+
+```bash
+docker compose down
+```
+
+- Remove containers + volumes (delete environment):
+
+```bash
+docker compose down --volumes
+```
+
+- Access:
+	- WordPress: http://localhost:8000
+	- phpMyAdmin: http://localhost:8081 (default login: `wp_user` / `wp_password` unless changed in `.env`)
+
+- Need to add files to `wp-content`?
+	- Use `sudo` to create files, or change ownership to your user:
+
+```bash
+sudo chown -R $(id -u):$(id -g) wp-content
+```
+
+	- Or copy files into the running container to avoid changing host permissions:
+
+```bash
+docker compose exec wordpress mkdir -p /var/www/html/wp-content/plugins/my-plugin
+docker cp ./local/path/to/my-plugin wordpress:/var/www/html/wp-content/plugins/my-plugin
+```
+
+This TL;DR covers the most common commands for install, start, stop, access, and handling `wp-content` permissions.
+
+
