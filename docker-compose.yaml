@@ -1,7 +1,7 @@
 services:
   database:
     mem_limit: 2048m
-    image: mariadb:latest
+    image: ${MYSQL_IMAGE} #Defalts to mariadb:latest 
     restart: always
     ports:
       - "3306:3306"
@@ -19,7 +19,7 @@ services:
   phpmyadmin:
     depends_on:
       - database
-    image: phpmyadmin/phpmyadmin
+    image: ${PHPMYADMIN_IMAGE} #Default: phpmyadmin/phpmyadmin:latest
     restart: always
     ports:
       - "8081:80"
@@ -33,7 +33,7 @@ services:
   wordpress:
     depends_on:
       - database
-    image: wordpress:latest
+    image: ${WORDPRESS_IMAGE} #Default: wordpress:latest
     restart: unless-stopped
     ports:
       - "8080:80"
@@ -46,7 +46,7 @@ services:
       WORDPRESS_DB_NAME: '${MYSQL_DATABASE}'
     volumes:
      
-      - ./wp-content:/var/www/html/wp-content
+      - ${VOLUME_PATH} #Default: ./wp-content:/var/www/html/wp-content
     networks:
       - wordpress-network
       
