@@ -17,7 +17,7 @@ If you haven't already, clone the repository:
 git clone https://github.com/Zagaz/Wordpress-Docker-Enviroment.git
 cd wordpress-docker-enviroment
 ```
-### 🗂️ Changing the Folder Name After Cloning 
+#### 🗂️ Changing the Folder Name After Cloning 
 
 After cloning the repository, you can change the folder name to suit your preferences. Simply navigate to the parent directory and rename the folder using the following command:
 
