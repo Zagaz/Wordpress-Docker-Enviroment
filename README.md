@@ -103,3 +103,30 @@ The default data in the `.env` file is provided to help you get started with you
 You have successfully set up a WordPress environment using Docker Compose!
 
 
+## 🔐 Permissions: adding files to `wp-content`
+
+When you add files or create folders inside the `wp-content` directory on the host (for example `wp-content/plugins` or `wp-content/themes`), you may need admin privileges because the directory or files can be owned by `root` or by the webserver user inside the container. Below are a few safe options to add content:
+
+- Create folders/files using sudo (quick, but requires admin rights):
+
+```bash
+sudo mkdir -p wp-content/plugins/my-plugin
+sudo touch wp-content/plugins/my-plugin/my-plugin.php
+```
+
+- Give your user ownership of the folder (recommended if you will frequently add/edit files locally):
+
+```bash
+sudo chown -R $(id -u):$(id -g) wp-content
+```
+
+- Copy files into the running container (no host permission changes required):
+
+```bash
+docker compose exec wordpress mkdir -p /var/www/html/wp-content/plugins/my-plugin
+docker cp ./local/path/to/my-plugin wordpress:/var/www/html/wp-content/plugins/my-plugin
+```
+
+Note: Changing ownership or permissions affects security. Prefer chown to set ownership to your user if you plan to edit files locally. If you only need to add files occasionally, `sudo` or `docker cp` are convenient alternatives.
+
+
