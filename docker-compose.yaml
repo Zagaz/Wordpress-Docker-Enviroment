@@ -8,7 +8,7 @@ services:
     env_file:
       - .env
     volumes:
-      - db-data:/var/lib/mysql'
+      - db-data:/var/lib/mysql
     networks:
       - wordpress-network  
     environment:
@@ -45,11 +45,33 @@ services:
       WORDPRESS_DB_PASSWORD: '${MYSQL_PASSWORD}'
       WORDPRESS_DB_NAME: '${MYSQL_DATABASE}'
     volumes:
-     
       - ${VOLUME_PATH} #Default: ./wp-content:/var/www/html/wp-content
     networks:
       - wordpress-network
       
+  ftp:
+    image: stilliard/pure-ftpd
+    restart: unless-stopped
+    ports:
+      - "21:21" # FTP control port
+      - "30000-30009:30000-30009" # Passive ports range
+    env_file:
+      - .env
+    environment:
+      FTP_USER_NAME: '${FTP_USER_NAME}'
+      FTP_USER_PASSWORD: '${FTP_USER_PASSWORD}'
+      FTP_PASSIVE_PORTS: '30000:30009'
+      # Uncomment and set FTP_FORCE_PASSIVE_IP to your public IP or hostname if you are behind NAT
+      # FTP_FORCE_PASSIVE_IP: 'YOUR_PUBLIC_IP_OR_HOSTNAME'
+    volumes:
+      # Mount the host's wp-content directory to the FTP user's home directory
+      # This assumes your wp-content directory is located at ./wp-content relative to this docker-compose.yaml
+      - ./wp-content:/home/ftpuser/wp-content
+    networks:
+      - wordpress-network
+    depends_on:
+      - wordpress # Ensures WordPress is running before FTP starts
+
 volumes:
   db-data:
 networks:
