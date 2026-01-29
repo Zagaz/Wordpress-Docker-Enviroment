@@ -1,1 +1,67 @@
-wp-content/
+# ================================
+# WordPress core files
+# ================================
+/wordpress/
+/wp-admin/
+/wp-includes/
+/wp-content/index.php
+/wp-config.php
+/wp-config-sample.php
+/readme.html
+/license.txt
+/xmlrpc.php
+
+# ================================
+# Uploads & generated content
+# ================================
+/wp-content/uploads/
+/wp-content/upgrade/
+/wp-content/cache/
+/wp-content/ai1wm-backups/
+
+# ================================
+# Plugins & themes (keep only your own)
+# ================================
+/wp-content/plugins/*
+!/wp-content/plugins/your-plugin-name/
+
+/wp-content/themes/*
+!/wp-content/themes/your-theme-name/
+
+# ================================
+# Logs & debug files
+# ================================
+*.log
+error_log
+debug.log
+
+# ================================
+# OS & editor junk
+# ================================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# ================================
+# Dependency folders
+# ================================
+/node_modules/
+/vendor/
+
+# ================================
+# Environment files
+# ================================
+.env
+.env.*
+*.local.php
+
+# ================================
+# Build artifacts
+# ================================
+/dist/
+/build/
+*.map
+
