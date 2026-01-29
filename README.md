@@ -14,7 +14,7 @@ This section will guide you on how to use Docker Compose for setting up a WordPr
 If you haven't already, clone the repository:
 ```bash
 git clone https://github.com/Zagaz/Wordpress-Docker-Enviroment.git
-cd wordpress-docker-enviroment
+cd Wordpress-Docker-Enviroment
 ```
 #### 🗂️ Changing the Folder Name After Cloning 
 
