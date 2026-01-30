@@ -21,6 +21,8 @@ services:
     restart: always
     env_file:
       - .env
+    ports:
+      - "8080:80"
     environment:
       PMA_HOST: database
       MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
@@ -33,13 +35,17 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    ports:
+      - "80:80"
     environment:
       WORDPRESS_DB_HOST: database:3306
       WORDPRESS_DB_USER: '${MYSQL_USER}'
       WORDPRESS_DB_PASSWORD: '${MYSQL_PASSWORD}'
       WORDPRESS_DB_NAME: '${MYSQL_DATABASE}'
+      WORDPRESS_CONFIG_EXTRA: '${WORDPRESS_CONFIG_EXTRA:-}'
     volumes:
-      - ${VOLUME_PATH} #Default: ./wp-content:/var/www/html/wp-content
+      - ${VOLUME_PATH:-./wp-content}:/var/www/html/wp-content
+      # - ./wp-config.php:/var/www/html/wp-config.php
     networks:
       - wordpress-network
       
@@ -48,6 +54,9 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009"
     environment:
       FTP_USER_NAME: '${FTP_USER_NAME}'
       FTP_USER_PASSWORD: '${FTP_USER_PASSWORD}'
@@ -57,7 +66,7 @@ services:
     volumes:
       # Mount the host's wp-content directory to the FTP user's home directory
       # This assumes your wp-content directory is located at ./wp-content relative to this docker-compose.yaml
-      - ./wp-content:/home/ftpuser/wp-content
+      - ${VOLUME_PATH:-./wp-content}:/home/ftpuser/wp-content
     networks:
       - wordpress-network
     depends_on:
