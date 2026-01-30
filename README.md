@@ -14,14 +14,18 @@ This section will guide you on how to use Docker Compose for setting up a WordPr
 If you haven't already, clone the repository:
 ```bash
 git clone https://github.com/Zagaz/Wordpress-Docker-Environment.git
-cd Wordpress-Docker-Environment
+cd WordPress-Docker-Environment
 ```
 #### 🗂️ Changing the Folder Name After Cloning 
 
 After cloning the repository, you can change the folder name to suit your preferences. Simply navigate to the parent directory and rename the folder using the following command:
 
 ```bash
-mv Wordpress-Docker-Enviroment <new-folder-name>
+# (Optional) Navigate to the parent directory, if needed.
+cd ..
+#Once you are in the parent directory, rename the folder
+mv WordPress-Docker-Enviroment <new-folder-name>
+
 ```
 
 ### 2. ⚙️ Configuration 
